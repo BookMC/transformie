@@ -12,7 +12,7 @@ import java.util.List;
 public class TransformieClassLoader extends ClassLoader {
     private static final List<Transformer> transformers = new ArrayList<>();
 
-    private final List<String> exclusions = new ArrayList<>(Arrays.asList("java.", "sun.", "org.lwjgl.", "org.apache.logging.", "org.bookmc.transformie."));
+    private static final List<String> exclusions = new ArrayList<>(Arrays.asList("java.", "sun.", "org.lwjgl.", "org.apache.logging.", "org.bookmc.transformie.", "com.sun.", "javax."));
 
     public TransformieClassLoader() {
         super(TransformieClassLoader.class.getClassLoader());
@@ -57,5 +57,9 @@ public class TransformieClassLoader extends ClassLoader {
 
     public static void addTransformer(Transformer transformer) {
         transformers.add(transformer);
+    }
+
+    public static void addClassloaderExclusion(String dontLoad) {
+        exclusions.add(dontLoad);
     }
 }
