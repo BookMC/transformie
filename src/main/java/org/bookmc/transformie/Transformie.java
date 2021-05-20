@@ -18,7 +18,7 @@ public class Transformie {
         try {
             Class<?> cl = classLoader.loadClass(clazz);
 
-            cl.getDeclaredMethod("main", String[].class).invoke(null, (Object[]) args);
+            cl.getDeclaredMethod("main", String[].class).invoke(null, (Object) args);
         } catch (Exception e) {
             e.printStackTrace();
         }

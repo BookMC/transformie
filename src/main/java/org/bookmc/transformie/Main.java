@@ -8,6 +8,11 @@ public class Main {
     public static void main(String[] args) {
         List<String> stringList = new ArrayList<>(Arrays.asList(args));
         int mainClassIndex = stringList.indexOf("--transformieMain");
+
+        if (mainClassIndex == -1) {
+            throw new IllegalStateException("You must specify a main class. You do this with the program argument --transformieMain");
+        }
+
         String clazz = stringList.get(mainClassIndex + 1);
 
         stringList.remove(mainClassIndex);
