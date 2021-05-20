@@ -1,21 +1,32 @@
 package org.bookmc.transformie.classloader;
 
 import org.bookmc.transformie.Transformer;
+import org.bookmc.transformie.hacks.ClasspathHacks;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TransformieClassLoader extends ClassLoader {
+public class TransformieClassLoader extends URLClassLoader {
     private static final List<Transformer> transformers = new ArrayList<>();
 
-    private static final List<String> exclusions = new ArrayList<>(Arrays.asList("java.", "sun.", "org.lwjgl.", "org.apache.logging.", "org.bookmc.transformie.", "com.sun.", "javax."));
+    private static final List<String> exclusions = new ArrayList<>(Arrays.asList(
+        "java.",
+        "sun.",
+        "org.lwjgl.",
+        "org.apache.logging.",
+        "org.bookmc.transformie.",
+        "com.sun.",
+        "javax.",
+        "org.bookmc.tweaker."
+    ));
 
     public TransformieClassLoader() {
-        super(TransformieClassLoader.class.getClassLoader());
+        super(ClasspathHacks.getClasspathURLs(), TransformieClassLoader.class.getClassLoader());
     }
 
     @Override

@@ -22,7 +22,7 @@ public class MixinTransformer implements Transformer {
                         if (instruction instanceof MethodInsnNode && instruction.getOpcode() == Opcodes.INVOKEVIRTUAL) {
                             MethodInsnNode methodInsnNode = (MethodInsnNode) instruction;
 
-                            System.out.println(methodInsnNode);
+                            System.out.println(methodInsnNode.desc);
                         }
                     }
                 }
