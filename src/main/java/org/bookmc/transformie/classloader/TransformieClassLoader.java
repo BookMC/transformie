@@ -6,14 +6,29 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TransformieClassLoader extends ClassLoader {
     private static final List<Transformer> transformers = new ArrayList<>();
 
+    private final List<String> exclusions = new ArrayList<>(Arrays.asList("java.", "sun.", "org.lwjgl.", "org.apache.logging.", "org.bookmc.transformie."));
+
+    public TransformieClassLoader() {
+        super(TransformieClassLoader.class.getClassLoader());
+    }
+
     @Override
     public Class<?> loadClass(String name) throws ClassNotFoundException {
-        try (InputStream is = getResourceAsStream(name.replace(".", "/"))) {
+        ClassLoader parent = getParent();
+
+        for (String exclusion : exclusions) {
+            if (name.startsWith(exclusion)) {
+                return parent.loadClass(name);
+            }
+        }
+
+        try (InputStream is = getResourceAsStream(name.replace(".", "/") + ".class")) {
             if (is != null) {
                 try (ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
                     byte[] data = new byte[1024];
