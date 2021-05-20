@@ -16,7 +16,7 @@ public class Main {
         String clazz = stringList.get(mainClassIndex + 1);
 
         stringList.remove(mainClassIndex);
-        stringList.remove(mainClassIndex + 1);
+        stringList.remove(clazz);
 
         new Transformie(clazz).main(stringList.toArray(new String[0]));
     }
