@@ -22,7 +22,8 @@ public class TransformieClassLoader extends URLClassLoader {
         "org.bookmc.transformie.",
         "com.sun.",
         "javax.",
-        "org.bookmc.tweaker."
+        "org.bookmc.tweaker.",
+        "org.bookmc.loader."
     ));
 
     public TransformieClassLoader() {
