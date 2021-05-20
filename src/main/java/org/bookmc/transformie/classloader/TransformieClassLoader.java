@@ -15,15 +15,16 @@ public class TransformieClassLoader extends URLClassLoader {
     private static final List<Transformer> transformers = new ArrayList<>();
 
     private static final List<String> exclusions = new ArrayList<>(Arrays.asList(
-        "java.",
         "sun.",
+        "java.",
+        "javax.",
+        "com.sun.",
         "org.lwjgl.",
         "org.apache.logging.",
         "org.bookmc.transformie.",
-        "com.sun.",
-        "javax.",
         "org.bookmc.tweaker.",
-        "org.bookmc.loader."
+        "org.bookmc.loader.",
+        "net.minecraft.launchwrapper."
     ));
 
     public TransformieClassLoader() {
